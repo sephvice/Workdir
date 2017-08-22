@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_staff, only: [:show, :edit, :update, :destroy]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # GET /feeds
@@ -70,6 +71,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.fetch(:feed, {})
+      params.fetch(:feed, {}).permit(:staff)
     end
 end

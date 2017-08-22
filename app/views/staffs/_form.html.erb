@@ -30,6 +30,11 @@
        <%= form.password_field :password_confirmation, size: 40 %>
      </div>
 
+     <div class="field">
+       <%= form.label :department, 'Department:' %>
+       <%= form.text_field :department, size: 40 %>
+     </div>
+
     <div class="actions">
     <%= form.submit %>
     </div>

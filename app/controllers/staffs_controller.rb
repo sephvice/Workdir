@@ -6,11 +6,14 @@ class StaffsController < ApplicationController
   # GET /staffs.json
   def index
     @staffs = Staff.all
+    @feeds = Feed.all
   end
 
   # GET /staffs/1
   # GET /staffs/1.json
   def show
+    @staff = Staff.find(params[:id])
+    @staff_feeds = @staff.feeds
   end
 
   # GET /staffs/new

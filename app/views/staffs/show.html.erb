@@ -1,4 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_staff_path(@staff) %> |
-<%= link_to 'Back', staffs_path %>
+<div class="head">
+      <div>
+         <% if staff_signed_in? %>
+         <ul>
+           <li>
+
+               <%= link_to current_staff.email, staff_path(current_staff) %>
+           </li>
+           <li>
+             <%= link_to "Edit Account", edit_staff_registration_path %>
+           </li>
+           <li>
+             <%= link_to "Sign Out", destroy_staff_session_path, method: :delete %>
+           </li>
+         </ul>
+         <% end %>
+      </div>
+</div>
+<section>
+<div class="content">
+  <h1>User Profile</h1>
+  <ul>
+    <li>Email: <%= @staff.email %></li>
+    <li>Team: <%= current_staff.team.name %></li>
+    <li>Company: <%= current_staff.company.name %></li>
+  </ul>
+<%= link_to 'Edit Profile', edit_staff_path(@staff) %>
+</section>
+
+<h2>User Post</h2>
+<% @staff_feeds.each do |feed| %>
+<ul>
+  <li>
+    <%= feed.content %>
+   <table>
+    <tr>
+      <td><%= link_to 'Show', feed %></td>
+      <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+      <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    </table>
+  </li>
+</ul>
+<% end %>
+<%= link_to 'Return to Home', staffs_path %>
+</div>

@@ -5,22 +5,21 @@
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
-
-      <%= link_to 'Create new Post', new_feed_path %>
-
+      <th colspan="3"><%= link_to 'Create new Post', new_feed_path %></th>
     </tr>
   </thead>
-
+<% if staff_signed_in? %>
   <tbody>
     <% @feeds.each do |feed| %>
       <tr>
+        <td><%= feed.content %></td>
         <td><%= link_to 'Show', feed %></td>
         <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
         <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+  <% end %>
 </table>
-
+<%= link_to 'Back', staffs_path %>
 <br>

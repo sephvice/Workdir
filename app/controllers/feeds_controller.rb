@@ -1,22 +1,22 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :set_staff, only: [:show, :edit, :update, :destroy]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.all
+    @feeds = current_staff.feeds
   end
 
   # GET /feeds/1
   # GET /feeds/1.json
   def show
+
   end
 
   # GET /feeds/new
   def new
-    @feed = Feed.new
+    @feed = current_staff.feeds.build
   end
 
   # GET /feeds/1/edit
@@ -26,7 +26,8 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    @feed = Feed.new(feed_params)
+    #@feed = Feed.new(feed_params)
+    @feed = current_staff.feeds.build(feed_params)
 
     respond_to do |format|
       if @feed.save
@@ -71,6 +72,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.fetch(:feed, {}).permit(:staff)
+      params.fetch(:feed, {}).permit(:content)
     end
 end

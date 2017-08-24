@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comnpanies
   devise_for :staffs
   resources :feeds
   resources :staffs
@@ -16,5 +17,6 @@ Rails.application.routes.draw do
   get 'feeds/index'
   get 'feeds/new'
   get 'feeds/create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

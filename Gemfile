@@ -63,3 +63,5 @@ gem 'draper'
 gem 'pundit'
 
 gem "react-rails"
+
+gem 'carrierwave', '~> 1.0'

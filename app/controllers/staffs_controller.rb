@@ -74,6 +74,6 @@ class StaffsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
-      params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password)
+      params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password, :feed, :avatar, :avatar_cache, :remove_avatar, :staff_id)
     end
 end

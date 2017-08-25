@@ -1,3 +1,127 @@
 // Place all the styles related to the staffs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.head {
+  background: #273746;
+  width: 100%;
+  color: #fff;
+  padding: 10px 0;
+  top: -20px;
+  position: relative;
+  height: 32px;
+
+  a {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    color: #fff;
+    transition: 0.3s;
+    background: none;
+  }
+
+   ul {
+    margin: 0;
+    padding: 0;
+   }
+
+   li {
+     list-style: none;
+     float: right;
+     padding: 5px 8px;
+     margin: 0 15px 0 0;
+   }
+
+   .profile-avatar {
+     display: block;
+     height: 28px;
+     width: 28px;
+     background-size: cover;
+     background-position: center;
+     background-color: rgba(0,0,0,0.3);
+     overflow:hidden;
+     padding:0;
+     margin: 0;
+   }
+}
+
+.container {
+  padding: 10px 25px;
+
+  section {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  h1 {
+
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li{
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.5);
+    transition: 0.03s;
+  }
+
+  a:hover {
+    background: none;
+    color: rgba(0,0,0,0.9);
+    transition: 0.03s;
+  }
+
+  .create-feed {
+    max-width: 800px;
+    display: block;
+    margin: 10px auto;
+  }
+
+  .user_post {
+    border-top:1px rgba(0,0,0,0.2) solid;
+    margin: 20px 0;
+    max-width: 800px;
+    display: block;
+    margin: 25px auto;
+  }
+
+  .image-placeholder {
+    display: block;
+    height: 100px;
+    width: 100px;
+    background: rgba(0,0,0,0.2);
+    overflow: hidden;;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .feed-avatar {
+    display: block;
+    height: 60px;
+    width: 60px;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+}
+
+.clear {
+    clear: both;
+}
+
+.front {
+
+}

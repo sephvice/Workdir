@@ -1,45 +1,74 @@
 <p id="notice"><%= notice %></p>
 
 <div class="head">
-      <div>
+
+      <div class="menu-container">
          <% if staff_signed_in? %>
          <ul>
            <li>
-
-               <%= link_to current_staff.email, staff_path(current_staff) %>
-           </li>
-           <li>
-             <%= link_to "Edit Account", edit_staff_registration_path %>
-           </li>
-           <li>
              <%= link_to "Sign Out", destroy_staff_session_path, method: :delete %>
            </li>
+           <li>
+             <%= link_to "Account", edit_staff_registration_path %>
+           </li>
+           <li>
+               <%= link_to current_staff.email, staff_path(current_staff) %>
+           </li>
+           <li class="profile-avatar"><%= image_tag current_staff.avatar %></li>
          </ul>
+         </div class="clear">
+      </div> <!-- END OF MENU CONTAINER -->
 
-      </div>
-</div>
+</div> <!-- END of HEAD DIV -->
 
-<h1>User Dashboard</h1>
+<div class ="container">
 
 <section>
-  <div>
-      <%= link_to 'Create new Post', new_feed_path %>
+  <h2>User Dashboard</h2>
+
+  <div class="create-feed">
+    <%= form_for (@feeds.new) do |form| %>
+    <div class="field">
+      <%= form.label :content, 'Create New Post:' %>
+      <%= form.text_area :content %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="user_post">
+    <h2>User Feeds</h2>
     <ul>
     <% @feeds.each do |feed| %>
-      <li><%= feed.content %></li>
-    <% end %>
-  </ul>
-  </div>
+      <li>
+        <table>
+          <tr>
+            <td class="feed-avatar"><%= image_tag feed.staff.avatar %></td>
+            <td><%= link_to feed.staff.email, staff_path(feed.staff) %></td>
+            <td><%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br /><h4><%= feed.content %></h4></td>
+            <% if staff_signed_in? %>
+            <td><%= link_to 'Edit', edit_feed_path(feed) %><br /><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        </table>
+      </li>
+      <% end %>
+    </ul>
+  </div> <!-- END OF USER_POST -->
+
 </section>
 <% else %>
-<div>
+
+<div class="front">
   <ul>
    <li>
      <%= link_to "Sign In", staff_session_path %>
     </li>
-    <li>
-      <%= link_to "Sign Up", new_staff_registration_path %>
-    </li>
   </ul>
-</div>
+</div> <!-- END OF FRONT DIV -->
   <% end %>
+
+</div><!-- END of CONTAINER DIV -->

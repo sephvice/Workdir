@@ -8,4 +8,6 @@ class Staff < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  scope :staff_feeds, -> {where('team_id')}
+
 end

@@ -31,6 +31,7 @@
     <div class="field">
       <%= form.label :content, 'Create New Post:' %>
       <%= form.text_area :content %>
+      <%= form.hidden_field :staff_id, value: current_staff.id %>
     </div>
 
     <div class="actions">
@@ -49,9 +50,7 @@
             <td class="feed-avatar"><%= image_tag feed.staff.avatar %></td>
             <td><%= link_to feed.staff.email, staff_path(feed.staff) %></td>
             <td><%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br /><h4><%= feed.content %></h4></td>
-            <% if staff_signed_in? %>
-            <td><%= link_to 'Edit', edit_feed_path(feed) %><br /><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
+            <td><%= link_to 'Edit', edit_feed_path(@feeds) %><br /><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         </table>
       </li>

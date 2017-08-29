@@ -6,7 +6,7 @@ class StaffsController < ApplicationController
   # GET /staffs.json
   def index
     @staffs = Staff.all
-    @feeds = Feed.all
+    @feeds = Feed.team_feeds
   end
 
   # GET /staffs/1

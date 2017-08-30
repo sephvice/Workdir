@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :comnpanies
   devise_for :staffs
-  resources :feeds
+  resources :feeds do
+    resources :comments
+  end
   resources :staffs
   resources :books
 
@@ -18,6 +20,6 @@ Rails.application.routes.draw do
   get 'feeds/new'
   get 'feeds/create'
   get 'teams/index'
-
+  get 'feed_comments/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

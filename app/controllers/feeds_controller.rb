@@ -11,7 +11,8 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-
+    @feeds = current_staff.feeds
+    @comments = Comment.where(feed_id: @feed).order('created_at DESC')
   end
 
   # GET /feeds/new

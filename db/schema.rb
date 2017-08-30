@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824093915) do
+ActiveRecord::Schema.define(version: 20170830012952) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20170824093915) do
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "content"
+    t.bigint "feed_id"
+    t.bigint "staff_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_comments_on_feed_id"
+    t.index ["staff_id"], name: "index_comments_on_staff_id"
   end
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -100,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170824093915) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "avatar"
+    t.string "role"
     t.index ["email"], name: "index_staffs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
@@ -134,5 +145,7 @@ ActiveRecord::Schema.define(version: 20170824093915) do
     t.index ["reset_password_token"], name: "index_views_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "feeds"
+  add_foreign_key "comments", "staffs"
   add_foreign_key "teams", "companies"
 end

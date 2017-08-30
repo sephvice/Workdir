@@ -7,6 +7,7 @@ class StaffsController < ApplicationController
   def index
     @staffs = Staff.all
     @feeds = Feed.team_feeds
+    @comments = Comment.where(feed_id: @feed).order('created_at DESC')
   end
 
   # GET /staffs/1
@@ -74,6 +75,26 @@ class StaffsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
-      params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password, :feed, :avatar, :avatar_cache, :remove_avatar, :staff_id)
+      params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password, :feed, :avatar, :avatar_cache, :remove_avatar, :staff_id, :comment)
     end
+
+    def resource_name
+      :comment
+    end
+    helper_method :resource_name
+
+    def resource
+      @resource ||= Comment.new
+    end
+    helper_method :resource
+
+    def devise_mapping
+      @devise_mapping ||= Devise.mappings[:comment]
+    end
+    helper_method :devise_mapping
+
+    def resource_class
+      User
+    end
+    helper_method :resource_class
 end

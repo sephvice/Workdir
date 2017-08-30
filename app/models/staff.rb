@@ -1,6 +1,7 @@
 class Staff < ApplicationRecord
   has_many :feeds
   belongs_to :team
+  has_many :comments
 
   mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:

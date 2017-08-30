@@ -30,6 +30,9 @@
        <%= form.password_field :password_confirmation, size: 40 %>
      </div>
 
+     <div class="fild">
+        <%= form.collection_select :role, Staff::ROLES, :to_s, :humanize %>
+     </div>
 
     <div class="actions">
     <%= form.submit %>

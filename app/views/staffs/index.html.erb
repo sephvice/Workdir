@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="head">
 
       <div class="menu-container">
@@ -22,7 +20,9 @@
 </div> <!-- END of HEAD DIV -->
 
 <div class ="container">
-
+  <div class="toast">
+    <p id="notice"><%= notice %></p>
+  </div>
 <section>
   <h2>User Dashboard</h2>
 
@@ -41,16 +41,44 @@
   </div>
 
   <div class="user_post">
-    <h2>User Feeds</h2>
+    <h3>User Feeds</h3>
     <ul>
     <% @feeds.each do |feed| %>
       <li>
         <table>
           <tr>
-            <td class="feed-avatar"><%= image_tag feed.staff.avatar %></td>
-            <td><%= link_to feed.staff.email, staff_path(feed.staff) %></td>
-            <td><%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br /><h4><%= feed.content %></h4></td>
-            <td><%= link_to 'Edit', edit_feed_path(@feeds) %><br /><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="feed-avatar">
+              <%= image_tag feed.staff.avatar %>
+            </td>
+            <td>
+              <%= link_to feed.staff.email, staff_path(feed.staff) %>
+            </td>
+            <td>
+              <%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br />
+              <h4><%= feed.content %></h4>
+            </td>
+            <% if can? :update, feed %>
+            <td>
+              <%= link_to 'Edit', edit_feed_path(feed) %><br />
+              <%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @comments.each do |comment| %>
+              <%= comment.content %>
+            <% end %>
+            <%= form_for :comment, url: feed_comments_path(feed) do |f| %>
+            <div class="field">
+              <%= f.label :comment %>
+              <%= f.text_area :content, id: :comment_content %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+            <% end %>
+
           </tr>
         </table>
       </li>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830012952) do
+ActiveRecord::Schema.define(version: 20170831045747) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -111,6 +111,10 @@ ActiveRecord::Schema.define(version: 20170830012952) do
     t.string "last_sign_in_ip"
     t.string "avatar"
     t.string "role"
+    t.string "pubimg_file_name"
+    t.string "pubimg_content_type"
+    t.integer "pubimg_file_size"
+    t.datetime "pubimg_updated_at"
     t.index ["email"], name: "index_staffs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end

@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :find_feed
   before_action :find_comment, only: [:destroy, :edit, :update, :comment_owner]
-  before_action :comment_owner, only: [:destroy, :edit, :update]
   before_action :configure_permitted_parameters, if: :devise_controller?
   # GET /comments
   # GET /comments.json
@@ -28,10 +27,11 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params.merge(feed_id: params[:feed_id]))
+    #Added and modified
+    @comment = Comment.new(comment_params.merge(feed_id: params[:feed_id],staff_id: params[:staff_id]))
     @comment.staff_id = current_staff.id
-    @comment.save
 
+    #default generated
     respond_to do |format|
       if @comment.save
         format.html { redirect_to staffs_path, notice: 'Comment was successfully created.' }
@@ -78,19 +78,13 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:content, :feed_id, :staff_id)
     end
 
+    #Added to pin point which feed
     def find_comment
       @comment = @feed.comments.find(params[:id])
     end
 
     def find_feed
       @feed = Feed.find(params[:feed_id])
-    end
-
-    def comment_owner
-      unless current_staff.id = @comment.staff_id
-        flash[:notice] = "you must be logged as the user to edit"
-          redirect_to @feed
-      end
     end
 
 end

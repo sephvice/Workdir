@@ -13,47 +13,47 @@
            <li>
                <%= link_to current_staff.email, staff_path(current_staff) %>
            </li>
-           <li class="profile-avatar"><%= image_tag current_staff.avatar %></li>
+           <li class="profile-avatar"><%= image_tag current_staff.avatar, size: '28x28' %></li>
          </ul>
          <% end %>
          </div class="clear">
       </div> <!-- END OF MENU CONTAINER -->
 
 </div> <!-- END of HEAD DIV -->
-<p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
 <div class="container">
-<section>
-  <h2><%= @staff.email %> Profile</h2>
-  <ul>
-    <li class="image-placeholder"><%= image_tag @staff.avatar %></li>
-    <li>Email: <%= @staff.email %></li>
-    <li>Team: <%= @staff.team.name %></li>
-  </ul>
-  <% if can? :update, @staff %>
-<%= link_to 'Edit Profile', edit_staff_registration_path(@staff) %>
-<% end %>
-</section>
-
-<section>
-<h2><%= @staff.email %> Post</h2>
-<% @staff_feeds.each do |feed| %>
-<ul>
-  <li>
-   <table>
-    <tr>
-      <td>
-        <%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br />
-        <h4><%= feed.content %><h4>
-      </td>
-      <% if can? :update, feed %>
-      <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-      <td><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <section>
+    <h2><%= @staff.email %> Profile</h2>
+    <ul>
+      <li class="image-placeholder"><%= image_tag @staff.avatar, size: '100x100' %></li>
+      <li>Email: <%= @staff.email %></li>
+      <li>Team: <%= @staff.team.name %></li>
+    </ul>
+      <% if can? :update, @staff %>
+        <%= link_to 'Edit Profile', edit_staff_registration_path(@staff) %>
       <% end %>
-    </tr>
-    </table>
-  </li>
-</ul>
-<% end %>
-<%= link_to 'Return to Home', staffs_path %>
-</section>
+    </section>
+
+    <section>
+      <h2><%= @staff.email %> Post</h2>
+      <% @staff_feeds.each do |feed| %>
+      <ul>
+        <li>
+          <table>
+            <tr>
+              <td>
+                <%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br />
+                <h4><%= feed.content %><h4>
+              </td>
+                <% if can? :update, feed %>
+              <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+              <td><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
+              </tr>
+            </table>
+          </li>
+        </ul>
+        <% end %>
+        <%= link_to 'Return to Home', staffs_path %>
+    </section>
 </div>

@@ -58,9 +58,9 @@ gem 'activeadmin'
 
 # Plus integrations with:
 gem 'devise'
-gem 'cancan', '~> 2.0'# or cancancan
+gem 'cancan'# or cancancan
 gem 'draper'
 gem 'pundit'
 gem "react-rails"
 gem 'carrierwave', '~> 1.0'
-gem "paperclip", "~> 5.0.0"
+gem "mini_magick"

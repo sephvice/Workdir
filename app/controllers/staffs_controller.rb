@@ -78,6 +78,7 @@ class StaffsController < ApplicationController
       params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password, :feed, :avatar, :avatar_cache, :remove_avatar, :staff_id, :comment)
     end
 
+    #render mapping for devise
     def resource_name
       :comment
     end
@@ -94,7 +95,8 @@ class StaffsController < ApplicationController
     helper_method :devise_mapping
 
     def resource_class
-      User
+      Comment
     end
     helper_method :resource_class
+
 end

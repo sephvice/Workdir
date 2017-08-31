@@ -26,6 +26,7 @@
 <section>
   <h2>User Dashboard</h2>
 
+  <!-- form for feed -->
   <div class="create-feed">
     <%= form_for (@feeds.new) do |form| %>
     <div class="field">
@@ -43,9 +44,10 @@
   <div class="user_post">
     <h3>User Feeds</h3>
     <ul>
-    <% @feeds.each do |feed| %>
+    <% @feeds.each do |feed| %> <!-- start of feed block -->
       <li>
         <table>
+
           <tr>
             <td class="feed-avatar">
               <%= image_tag feed.staff.avatar %>
@@ -62,24 +64,36 @@
               <%= link_to 'Edit', edit_feed_path(feed) %><br />
               <%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
-            <% end %>
+            <% end %> <!-- end of feed block -->
           </tr>
+
           <tr>
-            <% @comments.each do |comment| %>
-              <%= comment.content %>
+            <% feed.comments.each do |comment| %> <!-- start of comment block -->
+              <td>
+                <p><%= comment.content %></p>
+              </td>
+              <td>
+                <% if can? :update, comment %>
+                <%= link_to 'Edit', edit_feed_comment_path(comment.feed, comment) %>
+                <%= link_to 'Delete', [comment.feed, comment], method: :delete, data: { confirm: 'Are you sure?'} %>
+                <% end %>
+              </td>
             <% end %>
-            <%= form_for :comment, url: feed_comments_path(feed) do |f| %>
-            <div class="field">
-              <%= f.label :comment %>
-              <%= f.text_area :content, id: :comment_content %>
-            </div>
+            <td>
+              <!-- form for comment -->
+              <%= form_for :comment, url: feed_comments_path(feed) do |f| %>
+              <div class="field">
+                <%= f.label :comment %>
+                <%= f.text_area :content, id: :comment_content %>
+              </div>
 
-            <div class="actions">
-              <%= f.submit %>
-            </div>
-            <% end %>
-
+              <div class="actions"> <!-- form submit for comment -->
+                <%= f.submit %>
+              </div>
+              <% end %> <!-- end of comment block -->
+            </td>
           </tr>
+
         </table>
       </li>
       <% end %>

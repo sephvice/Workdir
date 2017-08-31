@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   get 'feeds/new'
   get 'feeds/create'
   get 'teams/index'
-  get 'feed_comments/index'
+  get 'feeds/:id/comments/:id', to: 'comments#update', as: 'comment'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="head">
 
       <div class="menu-container">
@@ -22,7 +20,7 @@
       </div> <!-- END OF MENU CONTAINER -->
 
 </div> <!-- END of HEAD DIV -->
-
+<p id="notice"><%= notice %></p>
 <div class="container">
 <section>
   <h2><%= @staff.email %> Profile</h2>
@@ -31,7 +29,7 @@
     <li>Email: <%= @staff.email %></li>
     <li>Team: <%= @staff.team.name %></li>
   </ul>
-  <% if staff_signed_in? %>
+  <% if can? :update, @staff %>
 <%= link_to 'Edit Profile', edit_staff_registration_path(@staff) %>
 <% end %>
 </section>
@@ -47,8 +45,10 @@
         <%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br />
         <h4><%= feed.content %><h4>
       </td>
+      <% if can? :update, feed %>
       <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
       <td><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
     </table>
   </li>

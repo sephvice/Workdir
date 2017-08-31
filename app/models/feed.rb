@@ -3,5 +3,4 @@ class Feed < ApplicationRecord
   has_many :comments
 
   scope :team_feeds, -> {where('staff_id')}
-
 end

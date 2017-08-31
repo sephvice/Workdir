@@ -1,19 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @comment.content %>
-</p>
+<div class="container">
+  <section>
+    <h1>Editing Comment</h1>
 
-<p>
-  <strong>Feed:</strong>
-  <%= @comment.feed %>
-</p>
+    <%= form_for @comment, url: feed_comments_path(@feed), method: :patch do |form| %>
+      <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-<p>
-  <strong>Staff:</strong>
-  <%= @comment.staff %>
-</p>
+          <ul>
+          <% comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+      <div class="field">
+        <%= form.label :content %>
+        <%= form.text_area :content, id: :comment_content %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+    
+    <%= link_to 'Back', staff_path %>
+  </section>
+</div>

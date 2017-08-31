@@ -10,5 +10,4 @@ class Staff < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   scope :staff_feeds, -> {where('team_id')}
-
 end

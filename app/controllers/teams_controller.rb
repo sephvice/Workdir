@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.member_feeds
-    @staffs = Staff.staff_feeds(current_staff)
+    @staffs = current_staff.co_teams
     @teams = current_staff.team_id
   end
 

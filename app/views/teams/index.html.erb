@@ -1,5 +1,7 @@
 <div class="head">
-
+      <div class="brand">
+        <h2><%= link_to 'TAP', staffs_path %></h2>
+      </div>
       <div class="menu-container">
 
          <% if staff_signed_in? %>
@@ -21,7 +23,7 @@
          <% end %>
          </div class="clear">
       </div> <!-- END OF MENU CONTAINER -->
-
+</div class="clear">
 </div> <!-- END of HEAD DIV -->
 
 <p id="notice"><%= notice %></p>
@@ -42,5 +44,6 @@
         <% end %>
       </tbody>
     </table>
+    <%= link_to 'Return to Home', staffs_path %>
   </section>
 </div>

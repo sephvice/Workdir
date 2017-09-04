@@ -64,3 +64,6 @@ gem 'pundit'
 gem "react-rails"
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
+gem 'bootstrap', '~> 4.0.0.beta'
+gem 'jquery-rails'
+gem "slim-rails"

@@ -5,7 +5,9 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.staffs
+    @teams = Team.member_feeds
+    @staffs = Staff.staff_feeds(current_staff)
+    @teams = current_staff.team_id
   end
 
   # GET /teams/1
@@ -70,6 +72,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.fetch(:team, {})
+      params.fetch(:team, {}).permit(:name, :company_id, :team_id)
     end
 end

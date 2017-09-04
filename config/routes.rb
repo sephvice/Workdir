@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   resources :staffs
   resources :books
+  resources :teams
 
   # resources :user_dashboards
   # resources :users
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
   get 'feeds/index'
   get 'feeds/new'
   get 'feeds/create'
-  get 'teams/index', to: 'teams#index'
   get 'feeds/:id/comments/:id', to: 'comments#update', as: 'comment'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

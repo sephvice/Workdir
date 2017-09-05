@@ -110,6 +110,10 @@ GEM
       activesupport (~> 5.0)
       request_store (~> 1.0)
     erubi (1.6.1)
+    exception_handler (0.7.7.0)
+      bundler
+      rails (>= 4.2.0)
+      responders
     execjs (2.7.0)
     ffi (1.9.18)
     formtastic (3.1.5)
@@ -299,6 +303,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   draper
+  exception_handler (~> 0.7.7.0)
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

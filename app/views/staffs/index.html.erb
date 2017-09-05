@@ -70,9 +70,11 @@
                   <h4><%= feed.content %></h4>
                 </div>
                   <% if can? :update, feed %>
-                <div class="col-xs-6">
+                <div class="feed-action col-xs-6">
                   <%= link_to 'Edit', edit_feed_path(feed) %>
-                  <%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to feed, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                  <% end %>
                 </div>
                   <% end %> <!-- end of feed block -->
               </div>
@@ -92,7 +94,7 @@
                   <div class="comment-context">
                     <p><%= comment.content %></p>
                   </div>
-                  <div>
+                  <div class="comment-action">
                     <% if can? :update, comment %>
                       <%= link_to 'Edit', edit_feed_comment_path(comment.feed, comment) %>
                       <%= link_to [comment.feed, comment], method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn' do %>
@@ -117,8 +119,9 @@
             </div>
 
           <% end %>
-  </div> <!-- END OF USER_POST -->
 
+  </div> <!-- END OF USER_POST -->
+    <%= will_paginate @feeds %>
   </section>
   <% else %>
 

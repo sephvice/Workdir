@@ -30,7 +30,20 @@ body {
     padding: 0 15px;
 
     a {
-      font-size: 18px;
+      background: url(app_network_2.png);
+      background-size: cover;
+      height: 28px;
+      width: 28px;
+      overflow: hidden;
+      display: block;
+      text-indent: 38px;
+      transition: width 0.3s;
+
+      &:hover {
+        background: url(app_network_2.png);
+        background-size: cover;
+        transition: width 0.3s;
+      }
     }
 
   }
@@ -40,25 +53,26 @@ body {
     text-decoration: none;
     transition: 0.3s;
     font-size: 12px;
-  }
 
-  a:hover {
-    color: #fff;
-    transition: 0.3s;
-    background: none;
+    &:hover {
+      color: #fff;
+      transition: 0.3s;
+      background: none;
+    }
   }
 
    ul {
     margin: 0;
     padding: 0;
+
+    li {
+      list-style: none;
+      float: right;
+      padding: 0px 8px;
+      margin: 0 15px 0 0;
+    }
    }
 
-   li {
-     list-style: none;
-     float: right;
-     padding: 0px 8px;
-     margin: 0 15px 0 0;
-   }
 
    .profile-avatar {
      display: block;
@@ -106,22 +120,24 @@ body {
   ul {
     padding: 0;
     margin: 0;
-  }
 
-  li{
-    list-style: none;
-  }
+    li{
+      list-style: none;
 
-  a {
-    text-decoration: none;
-    color: rgba(0,0,0,0.5);
-    transition: 0.03s;
-  }
 
-  a:hover {
-    background: none;
-    color: rgba(0,0,0,0.9);
-    transition: 0.03s;
+        a {
+          text-decoration: none;
+          color: rgba(0,0,0,0.5);
+          transition: 0.03s;
+
+          &:hover {
+            background: none;
+            color: rgba(0,0,0,0.9);
+            transition: 0.03s;
+          }
+        }
+    }
+
   }
 
   .create-feed {
@@ -153,54 +169,79 @@ body {
     background-size: cover;
   }
 
-  .feed-avatar {
-    img {
-      border-radius: 2px 2px 2px 2px;
-      float: left;
-    }
-  }
-
-  .feed-user {
-    float: left;
-    padding: 0 25px;
-  }
-
-  .feed-context {
-    padding: 15px 75px;
-    color: rgba(0,0,0,0.7);
-  }
-
-  .comment-profile {
-    float: left;margin: 5px 10px 0 0;
-    img {
-      border-radius: 2px 2px 2px 2px;
-    }
-  }
-
-  .comment-user {
-    float: left;
-    font-size: 12px;
-  }
-
-  .comment-context {
-    font-size: 12px;
-    padding: 25px 37px;
-  }
-
   .feed-content {
      margin: 35px 0 15px;
      padding: 25px 5px 0;
      border-top: 1px rgba(0,0,0,0.3) solid;
+
+     .feed-avatar {
+       img {
+         border-radius: 2px 2px 2px 2px;
+         float: left;
+       }
+     }
+
+     .feed-user {
+       float: left;
+       padding: 0 25px;
+     }
+
+     .feed-context {
+       padding: 15px 75px;
+       color: rgba(0,0,0,0.7);
+     }
+
+     .feed-action {
+       text-align: right;
+       a {
+         font-size: 13px;
+       }
+     }
   }
 
   .comment-content {
     padding: 15px 20px;
+
+    .comment-profile {
+      float: left;margin: 5px 10px 0 0;
+      img {
+        border-radius: 2px 2px 2px 2px;
+      }
+    }
+
+    .comment-user {
+      float: left;
+      font-size: 12px;
+    }
+
+    .comment-context {
+      font-size: 12px;
+      padding: 25px 37px;
+    }
+
+    .comment-action {
+      text-align: right;
+      padding: 5px;
+      a {
+        font-size: 13px;
+      }
+    }
 
     .create-comment {
       textarea {
         width: 100%;
         border-radius: 2px 2px 2px 2px;
         border: 1px rgba(0,0,0,0.4) solid;
+      }
+
+
+      .field {
+        margin: 15px auto 10px;
+
+        textarea {
+          font-size: 12px;
+          padding: 10px;
+        }
       }
 
       .actions {

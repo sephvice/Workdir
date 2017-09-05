@@ -8,6 +8,7 @@ class StaffsController < ApplicationController
     @staffs = Staff.all
     @feeds = Feed.team_feeds
     @comments = Comment.where(feed_id: @feed).order('created_at DESC')
+    @feeds = Feed.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /staffs/1

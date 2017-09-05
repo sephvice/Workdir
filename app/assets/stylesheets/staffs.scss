@@ -32,6 +32,7 @@ body {
     a {
       font-size: 18px;
     }
+
   }
 
   a {
@@ -215,4 +216,47 @@ body {
 
 .front {
 
+}
+
+.log-session {
+  width: 30%;
+
+  .log-head {
+    background: #273746;
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+
+    h2 {
+      color: #fff;
+      font-weight: bolder;
+      font-size: 20px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .log-field {
+    width: 100%;
+  }
+
+  label {
+    color: rgba(0,0,0,0.6);
+  }
+
+  .field {
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  .logo {
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin: 10px auto;
+    overflow: none;
+    text-indent: -2000em;
+    background: url(app_network_2.png) no-repeat;
+    background-size: cover;
+  }
 }

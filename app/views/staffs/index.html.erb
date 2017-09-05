@@ -1,9 +1,10 @@
+<% if staff_signed_in? %>
 <div class="head">
       <div class="brand">
         <h2><%= link_to 'TAP', staffs_path %></h2>
       </div>
       <div class="menu-container">
-         <% if staff_signed_in? %>
+
          <ul>
            <li>
              <%= link_to "Sign Out", destroy_staff_session_path, method: :delete %>
@@ -35,8 +36,7 @@
       <div class="create-feed">
         <%= form_for (@feeds.new) do |form| %>
       <div class="field">
-        <%= form.label :content, 'Create New Post:' %><br />
-        <%= form.text_area :content %>
+        <%= form.text_area :content, placeholder: 'Create a new post' %>
         <%= form.hidden_field :staff_id, value: current_staff.id %>
       </div>
 
@@ -105,8 +105,7 @@
                   <!-- form for comment -->
                     <%= form_for :comment, url: feed_comments_path(feed) do |f| %>
                       <div class="field">
-                        <%= f.label :comment, 'Add new comment:' %><br />
-                        <%= f.text_area :content, id: :comment_content %>
+                        <%= f.text_area :content, id: :comment_content, placeholder: 'Add new comment' %>
                         <%= f.hidden_field :staff_id, value: current_staff.id %>
                       </div>
 
@@ -123,13 +122,31 @@
   </section>
   <% else %>
 
-<div class="front">
-  <ul>
-   <li>
-     <%= link_to "Sign In", staff_session_path %>
-    </li>
-  </ul>
-</div> <!-- END OF FRONT DIV -->
-  <% end %>
-
+<div class="container log-session">
+  <div class="log-head">
+    <h2>Please Sign In</h2>
+  </div>
+  <section>
+  <div class="logo">
+    <h1>WORKDIR</h1>
+  </div>
+  <%= form_for(:staff, :url => session_path(:staff)) do |f| %>
+    <div class="field">
+      <%= f.text_field :email, placeholder: "email", class: "log-field" %>
+    </div>
+    <div class="field">
+      <%= f.password_field :password, placeholder: "password", class: "log-field" %>
+    </div>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+    <div class="field">
+      <%= f.submit 'Sign in', class: "log-field" %>
+      <%= link_to "Forgot your password?", new_password_path(:staff) %>
+    </div>
+    <% end %>
+  </section>
+</div>
+  <% end %> <!-- IF Signed in statement -->
 </div><!-- END of CONTAINER DIV -->

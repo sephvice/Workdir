@@ -21,5 +21,7 @@ module Workdir
       db: true,
       dev: true,
     }
+
+        config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
   end
 end

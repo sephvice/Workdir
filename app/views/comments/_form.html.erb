@@ -1,4 +1,4 @@
-<%= form_for comment, url: [comment.feed, comment] do |form| %>
+<%= form_for comment, url: [comment.post, comment] do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -11,12 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
+  <div class="comment-content">
+    <div class="create-comment">
     <%= form.text_area :content, id: :comment_content %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>

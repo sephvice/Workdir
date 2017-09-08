@@ -6,16 +6,16 @@ class StaffsController < ApplicationController
   # GET /staffs.json
   def index
     @staffs = Staff.all
-    @feeds = Feed.team_feeds
-    @comments = Comment.where(feed_id: @feed).order('created_at DESC')
-    @feeds = Feed.paginate(page: params[:page], per_page: 5)
+    @posts = Post.team_posts
+    @comments = Comment.where(post_id: @post).order('created_at DESC')
+    @posts = Post.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /staffs/1
   # GET /staffs/1.json
   def show
     @staff = Staff.find(params[:id])
-    @staff_feeds = @staff.feeds
+    @staff_posts = @staff.posts
   end
 
   # GET /staffs/new
@@ -76,7 +76,7 @@ class StaffsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
-      params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password, :feed, :avatar, :avatar_cache, :remove_avatar, :staff_id, :comment)
+      params.fetch(:staff, {}).permit(:username, :email, :password, :salt, :encrypted_password, :feed, :avatar, :avatar_cache, :remove_avatar, :staff_id, :post_id, :comment, :post, :body, :picture )
     end
 
     #render mapping for devise

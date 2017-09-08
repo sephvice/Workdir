@@ -18,6 +18,7 @@ body {
   position: fixed;
   top: 0;
   box-shadow: 1px 0 2px rgba(0,0,0,0.7);
+  z-index: 99;
 
   .menu-container {
     float: right;
@@ -92,11 +93,24 @@ body {
   margin: 55px auto 15px;
 
   section {
-    max-width: 70%;
+    max-width: 800px;
     margin: 0 auto;
     background: #eff3f5;
     padding: 25px;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+
+    .feed-form {
+      margin: 25px 0 0;
+    }
+
+    .feed-actions {
+      margin: 15px 0;
+
+      input {
+        cursor: pointer;
+      }
+    }
+
   }
 
   h1 {
@@ -105,6 +119,7 @@ body {
 
   h2 {
     width: 80%;
+    font-weight: bolder;
     display: block;
   }
 
@@ -230,8 +245,11 @@ body {
     .create-comment {
       textarea {
         width: 100%;
+        height: 85px;
+        padding: 8px;
         border-radius: 2px 2px 2px 2px;
         border: 1px rgba(0,0,0,0.4) solid;
+        font-size: 12px;
       }
 
 
@@ -262,11 +280,17 @@ body {
 .log-session {
   width: 30%;
 
+  section {
+    max-width: 70%;
+  }
+
   .log-head {
     background: #273746;
     padding: 10px;
     width: 70%;
     margin: 0 auto;
+
+
 
     h2 {
       color: #fff;
@@ -306,7 +330,7 @@ body {
 .ehead {
   background: #273746;
   color: #fff;
-  width: 70%;
+  width: 72%;
   margin: 0 auto;
   padding: 10px;
 

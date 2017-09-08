@@ -1,8 +1,8 @@
 class Staff < ApplicationRecord
   has_many :feeds
-  has_many :posts
+  has_many :posts, dependent: :destroy
   belongs_to :team
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:

@@ -1,3 +1,55 @@
 // Place all the styles related to the comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment-content {
+  padding: 15px 20px;
+
+  .comment-profile {
+    float: left;margin: 5px 10px 0 0;
+    img {
+      border-radius: 2px 2px 2px 2px;
+    }
+  }
+
+  .comment-user {
+    float: left;
+    font-size: 12px;
+  }
+
+  .comment-context {
+    font-size: 12px;
+    padding: 25px 37px;
+  }
+
+  .comment-action {
+    text-align: right;
+    padding: 5px;
+    a {
+      font-size: 13px;
+    }
+  }
+
+  .create-comment {
+    textarea {
+      width: 100%;
+      border-radius: 2px 2px 2px 2px;
+      border: 1px rgba(0,0,0,0.4) solid;
+      font-size: 12px;
+    }
+
+
+    .field {
+      margin: 15px auto 10px;
+
+      textarea {
+        font-size: 12px;
+        padding: 10px;
+      }
+    }
+
+    .actions {
+      font-size: 12px;
+    }
+  }
+}

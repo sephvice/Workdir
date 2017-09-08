@@ -10,8 +10,8 @@ class Ability
       # else
       #   can :read, :all
       # end
-      can [:update, :destroy], Feed do |feed|
-         feed.staff_id == user.id
+      can [:update, :destroy], Post do |post|
+         post.staff_id == user.id
      end
 
      can [:update, :destroy], Comment do |comment|

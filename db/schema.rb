@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908003729) do
+ActiveRecord::Schema.define(version: 20170908095644) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -48,13 +48,27 @@ ActiveRecord::Schema.define(version: 20170908003729) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ckeditor_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "type", limit: 30
+    t.integer "width"
+    t.integer "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "content"
     t.bigint "feed_id"
     t.bigint "staff_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "post_id"
     t.index ["feed_id"], name: "index_comments_on_feed_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["staff_id"], name: "index_comments_on_staff_id"
   end
 
@@ -159,6 +173,7 @@ ActiveRecord::Schema.define(version: 20170908003729) do
   end
 
   add_foreign_key "comments", "feeds"
+  add_foreign_key "comments", "posts"
   add_foreign_key "comments", "staffs"
   add_foreign_key "teams", "companies"
 end

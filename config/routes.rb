@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :posts
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :posts do
+    resources :comments
+  end
   resources :comnpanies
   devise_for :staffs
   resources :feeds do
@@ -18,9 +21,9 @@ Rails.application.routes.draw do
 
   root to: 'staffs#index'
   get 'staffs/index'
-  get 'feeds/index'
-  get 'feeds/new'
-  get 'feeds/create'
-  get 'feeds/:id/comments/:id', to: 'comments#update', as: 'comment'
+  get 'posts/index'
+  get 'posts/new'
+  get 'posts/create'
+  get 'posts/:id/comments/:id', to: 'comments#update', as: 'comment'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

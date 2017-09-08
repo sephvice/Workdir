@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :find_feed
+  before_action :find_post
   before_action :find_comment, only: [:destroy, :edit, :update, :comment_owner]
   before_action :configure_permitted_parameters, if: :devise_controller?
   # GET /comments
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
-    @comments = Comment.where(feed_id: @feed).order('created_at DESC')
+    @comments = Comment.where(post_id: @post).order('created_at DESC')
   end
 
   # GET /comments/new
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     #Added and modified
-    @comment = Comment.new(comment_params.merge(feed_id: params[:feed_id],staff_id: params[:staff_id]))
+    @comment = Comment.new(comment_params.merge(post_id: params[:post_id],staff_id: params[:staff_id]))
     @comment.staff_id = current_staff.id
 
     #default generated
@@ -75,16 +75,16 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :feed_id, :staff_id)
+      params.require(:comment).permit(:content, :post_id, :body, :post, :staff_id)
     end
 
     #Added to pin point which feed
     def find_comment
-      @comment = @feed.comments.find(params[:id])
+      @comment = @post.comments.find(params[:id])
     end
 
-    def find_feed
-      @feed = Feed.find(params[:feed_id])
+    def find_post
+      @post = Post.find(params[:post_id])
     end
 
 end

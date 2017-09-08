@@ -1,0 +1,17 @@
+<% if @post.errors.any? %>
+  <ul>
+    <%= @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_for @post do |f| %>
+  <div>
+    <%= f.cktext_area :body, rows: 10 %>
+  </div>
+  <br />
+  <div>
+    <%= f.submit %>
+  </div>
+  <br />
+<% end %>

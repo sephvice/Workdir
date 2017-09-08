@@ -29,99 +29,93 @@
   <div class="toast">
     <p id="notice"><%= notice %></p>
   </div>
+
   <section>
-    <h2>Hi! What are you up to today?</h2>
-
-      <!-- form for feed -->
-      <div class="create-feed">
-        <%= form_for (@feeds.new) do |form| %>
-      <div class="field">
-        <%= form.text_area :content, placeholder: 'Create a new post' %>
-        <%= form.hidden_field :staff_id, value: current_staff.id %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit %>
-      </div>
+    <div>
+      <%= form_for @posts.new do |f| %>
+        <h2>Hi! What are you up to today?</h2>
+        <div class="feed-form">
+          <%= f.cktext_area :body, rows: 10, placeholder: 'Create a new post' %>
+          <%= f.hidden_field :staff_id, value: current_staff.id %>
+        </div>
+        <div class="feed-actions">
+          <%= f.submit %>
+        </div>
       <% end %>
     </div>
-  </section>
+  </section
 </div>
+
 <div class="container">
   <section>
+    <h3>User Feeds</h3>
+    <% @posts.each do |post| %>
     <div class="user_post">
-
-        <h3>User Feeds</h3>
-          <!-- start of feed block -->
-          <% @feeds.each do |feed| %>
-            <div class="feed-content">
-
-              <div>
-
-                <div class="feed-avatar col-xs-3">
-                  <%= image_tag feed.staff.avatar, size: '50x50'  %>
+        <div class="feed-content">
+          <div class="feed-avatar col-xs-3">
+            <%= image_tag post.staff.avatar, size: '50x50'  %>
+          </div>
+          <div class="feed-user col-xs-6">
+            <%= link_to post.staff.email, staff_path(post.staff) %><br />
+            <%= post.created_at.strftime("%b %d %Y, %l:%M%P") %>
+          </div>
+          <div class="clear"></div>
+          <div class="feed-context col-xs-9">
+            <h4><%= post.body.html_safe %></h4>
+          </div>
+            <% if can? :update, post %>
+            <div class="feed-action col-xs-6">
+              <%= link_to "Edit", edit_post_path(post) %>
+              <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+              <% end %>
+            </div>
+            <% end %>
+            <% if post != @posts.last %>
+            <hr />
+            <% end %>
+            <!-- start of comment block -->
+            <div class="comment-content">
+              <h6>Comments</h6>
+              <% post.comments.each do |comment| %> <!-- start of comment block -->
+                <div class="comment-profile">
+                  <%= image_tag comment.staff.avatar, size: '28x28'  %>
                 </div>
-                <div class="feed-user col-xs-6">
-                  <%= link_to feed.staff.email, staff_path(feed.staff) %><br />
-                  <%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %>
+                <div class="comment-user">
+                  <%= link_to comment.staff.email, staff_path(comment.staff) %><br />
+                  <%= comment.created_at.strftime('%b %d %Y, %l:%M%P') %>
                 </div>
                 <div class="clear"></div>
-                <div class="feed-context col-xs-9">
-                  <h4><%= feed.content %></h4>
+                <div class="comment-context">
+                  <p><%= comment.content %></p>
                 </div>
-                  <% if can? :update, feed %>
-                <div class="feed-action col-xs-6">
-                  <%= link_to 'Edit', edit_feed_path(feed) %>
-                  <%= link_to feed, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                <div class="comment-action">
+                  <% if can? :update, comment %>
+                    <%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %>
+                    <%= link_to [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn' do %>
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                    <% end %>
                   <% end %>
                 </div>
-                  <% end %> <!-- end of feed block -->
-              </div>
-
-              <!-- start of comment block -->
-              <div class="comment-content">
-                <h6>Comments</h6>
-                <% feed.comments.each do |comment| %> <!-- start of comment block -->
-                  <div class="comment-profile">
-                    <%= image_tag comment.staff.avatar, size: '28x28'  %>
-                  </div>
-                  <div class="comment-user">
-                    <%= link_to comment.staff.email, staff_path(comment.staff) %><br />
-                    <%= comment.created_at.strftime('%b %d %Y, %l:%M%P') %>
-                  </div>
-                  <div class="clear"></div>
-                  <div class="comment-context">
-                    <p><%= comment.content %></p>
-                  </div>
-                  <div class="comment-action">
-                    <% if can? :update, comment %>
-                      <%= link_to 'Edit', edit_feed_comment_path(comment.feed, comment) %>
-                      <%= link_to [comment.feed, comment], method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn' do %>
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                      <% end %>
-                    <% end %>
-                  </div>
-                <% end %>
-                <div class="create-comment">
-                  <!-- form for comment -->
-                    <%= form_for :comment, url: feed_comments_path(feed) do |f| %>
-                      <div class="field">
-                        <%= f.text_area :content, id: :comment_content, placeholder: 'Add new comment' %>
-                        <%= f.hidden_field :staff_id, value: current_staff.id %>
-                      </div>
-
-                      <div class="actions"> <!-- form submit for comment -->
-                        <%= f.submit %>
-                      </div>
-                      <% end %> <!-- end of comment block -->
+              <% end %>
+              <div class="create-comment">
+                <!-- form for comment -->
+                  <%= form_for :comment, url: post_comments_path(post) do |f| %>
+                    <div class="field">
+                      <%= f.text_area :content, id: :comment_content, placeholder: 'Add new comment' %>
+                      <%= f.hidden_field :staff_id, value: current_staff.id %>
                     </div>
-            </div>
 
+                    <div class="actions"> <!-- form submit for comment -->
+                      <%= f.submit %>
+                    </div>
+                    <% end %> <!-- end of comment block -->
+                  </div>
           <% end %>
-
+        </div>
+      </div>
   </div> <!-- END OF USER_POST -->
-    <%= will_paginate @feeds %>
+    <%= will_paginate @posts %>
   </section>
   <% else %>
 

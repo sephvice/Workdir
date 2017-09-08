@@ -20,10 +20,6 @@ module Workdir
     config.exception_handler = {
       db: true,
       dev: true,
-      layouts: {
-        '500' => 'exception'
-
-      }
     }
   end
 end

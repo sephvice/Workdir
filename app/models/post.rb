@@ -1,4 +1,3 @@
 class Post < ApplicationRecord
-  belongs_to :staffs
-
+  belongs_to :staff
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   resources :comnpanies
   devise_for :staffs
   resources :feeds do

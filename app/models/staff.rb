@@ -1,5 +1,6 @@
 class Staff < ApplicationRecord
   has_many :feeds
+  has_many :posts
   belongs_to :team
   has_many :comments
 

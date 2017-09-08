@@ -66,6 +66,6 @@ gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
-gem "slim-rails"
 gem 'exception_handler', '~> 0.7.7.0'
 gem 'will_paginate', '>= 3.1'
+gem "ckeditor"

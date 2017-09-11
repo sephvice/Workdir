@@ -5,10 +5,8 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.team_mems
-    @posts = Post.team_posts
     @comments = Comment.where(post_id: @post).order('created_at DESC')
-    @posts = Post.paginate(page: params[:page], per_page: 5)
+    @posts = Post.team_posts(current_staff.team_id).paginate(page: params[:page], per_page: 5).pagemaker
   end
 
   # GET /staffs/1

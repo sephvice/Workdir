@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
-     @posts = Post.order("created_at DESC")
+     @posts = Post.order("created_at ASC")
      @posts = current_staff.posts
      @posts = Post.paginate(page: params[:page])
    end

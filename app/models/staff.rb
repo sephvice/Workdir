@@ -13,4 +13,7 @@ class Staff < ApplicationRecord
   def co_teams
     team.staffs
   end
+
+  scope :team_mems, -> {where('team_id')}
+
 end

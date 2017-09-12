@@ -47,12 +47,12 @@
           <table>
             <tr>
               <td>
-                <%= feed.created_at.strftime("%b %d %Y, %l:%M%P") %><br />
-                <h4><%= feed.content %><h4>
+                <%= post.created_at.strftime("%b %d %Y, %l:%M%P") %><br />
+                <h4><%= post.body.html_safe %><h4>
               </td>
-                <% if can? :update, feed %>
-              <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-              <td><%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% if can? :update, post %>
+              <td><%= link_to 'Edit', edit_post_path(post) %></td>
+              <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 <% end %>
               </tr>
             </table>

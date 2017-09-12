@@ -1,12 +1,13 @@
 class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_staff!
 
   # GET /staffs
   # GET /staffs.json
   def index
     @comments = Comment.where(post_id: @post).order('created_at DESC')
-    @posts = Post.team_posts(current_staff).paginate(page: params[:page], per_page: 5)
+    @posts = Post.team_posts(current_staff.team_id).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /staffs/1

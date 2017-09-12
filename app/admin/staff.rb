@@ -18,6 +18,11 @@ permit_params :staff, :staffs, :email, :password, :encrypted_password, :team_id,
     column :created_at
   end
 
+    filter :email
+    filter :current_sign_in_at
+    filter :sign_in_count
+    filter :created_at
+
   form title: 'Staff Information' do |f|
     f.inputs 'Details' do
       f.input :email
